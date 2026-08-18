@@ -46,7 +46,9 @@ Feel free to open an [issue](https://github.com/kongchengavg/dsh-pet-StatusLight
 - 💬 **Character chat bubbles**: pop up when a task completes, errors, or asks you a question; tap **View Details** to jump straight to the session.
 - 🪟 **Always-on-top mini-window** (Windows): a transparent window independent of the browser — visible even when the browser is minimized; draggable, right-click to switch characters, auto-respawns on failure.
 
-## Installation
+## Install, Uninstall & Update
+
+### Install
 
 **Method 1: Hand it to your AI (copy and send the text below to your AI)**
 
@@ -54,15 +56,35 @@ Feel free to open an [issue](https://github.com/kongchengavg/dsh-pet-StatusLight
 
 **Method 2: Manual install**
 
-- **Static install** — published to npm; install with one command:
+Published to npm; install with one command:
 
-  ```sh
-  dsh plugin --profile web add dsh-pet-statuslight          # one-line npm install
-  # or via GitHub source:
-  dsh plugin --profile web add git+https://github.com/kongchengavg/dsh-pet-StatusLight.git
-  ```
+```sh
+dsh plugin --profile web add dsh-pet-statuslight          # one-line npm install
+# or via GitHub source:
+dsh plugin --profile web add git+https://github.com/kongchengavg/dsh-pet-StatusLight.git
+```
 
-  Restart dsh web and the plugin loads automatically.
+Restart dsh web and the plugin loads automatically.
+
+> Note: pnpm withholds versions published less than 24 hours ago; if you do not get the latest version, pin the version explicitly (e.g. `dsh-pet-statuslight@1.0.33`).
+
+### Uninstall
+
+```sh
+dsh plugin --profile web remove dsh-pet-statuslight
+```
+
+Restart dsh web and the plugin is removed.
+
+### Update
+
+```sh
+dsh plugin --profile web add dsh-pet-statuslight@<latest>   # npm source (pin version to bypass 24h hold)
+# or re-pull the latest from GitHub:
+dsh plugin --profile web add git+https://github.com/kongchengavg/dsh-pet-StatusLight.git
+```
+
+Re-adding completes the update; restart dsh web to apply.
 
 ## Usage
 

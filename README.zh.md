@@ -46,7 +46,9 @@
 - 💬 **角色专属聊天框**：任务完成、出错、向你提问时弹出气泡提示，点「查看详细」直接跳到对应会话。
 - 🪟 **系统级置顶小窗**（Windows）：独立于浏览器的透明小窗，浏览器最小化也照常显示；可拖动、可右键切换角色，异常退出自动重连。
 
-## 安装
+## 安装、卸载及更新
+
+### 安装
 
 **方法一：交给 AI（将以下文字复制并发给 AI）**
 
@@ -54,15 +56,35 @@
 
 **方法二：手动安装**
 
-- **静态安装** —— 已发布到 npm，一行命令安装：
+已发布到 npm，一行命令安装：
 
-  ```sh
-  dsh plugin --profile web add dsh-pet-statuslight          # npm 一键安装
-  # 或 GitHub 源：
-  dsh plugin --profile web add git+https://github.com/kongchengavg/dsh-pet-StatusLight.git
-  ```
+```sh
+dsh plugin --profile web add dsh-pet-statuslight          # npm 一键安装
+# 或 GitHub 源：
+dsh plugin --profile web add git+https://github.com/kongchengavg/dsh-pet-StatusLight.git
+```
 
-  重启 dsh web 后插件自动加载。
+重启 dsh web 后插件自动加载。
+
+> 提示：pnpm 会扣住发布不足 24 小时的新版本，若装到的不是最新版，请**点名版本号**安装（如 `dsh-pet-statuslight@1.0.33`）。
+
+### 卸载
+
+```sh
+dsh plugin --profile web remove dsh-pet-statuslight
+```
+
+重启 dsh web 后插件移除。
+
+### 更新
+
+```sh
+dsh plugin --profile web add dsh-pet-statuslight@<最新版本>   # npm 源（点名版本绕过 24h 扣留）
+# 或 GitHub 源重新拉取最新：
+dsh plugin --profile web add git+https://github.com/kongchengavg/dsh-pet-StatusLight.git
+```
+
+重新 add 即完成更新，重启 dsh web 生效。
 
 ## 用法
 
