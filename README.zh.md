@@ -1,4 +1,4 @@
-# dsh-plugin-StatusLight
+# dsh-StatusLight
 
 为 [DeepSeek Harness](https://github.com/deepseek-ai) 编写的 **状态灯动态 Cordis 插件**：用角色表情实时反映模型运行状态，并在任务完成 / 出错 / 向你提问时弹出角色专属聊天框气泡。支持 **9 个角色** 随时切换，还提供 **Windows 系统级置顶透明小窗**（独立于浏览器窗口，浏览器最小化也能看到状态）。
 
@@ -22,7 +22,7 @@
 ## 目录结构
 
 ```
-dsh-plugin-StatusLight/
+dsh-StatusLight/
 ├── src/                          # 源码（Cordis 插件定义）
 │   ├── host/index.js             # Host 半部分：状态机/事件/RPC/HTTP API/小窗进程
 │   ├── client/index.js           # Client 半部分：网页右下角浮动状态灯 UI

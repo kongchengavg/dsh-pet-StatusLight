@@ -1,4 +1,4 @@
-# dsh-plugin-StatusLight
+# dsh-StatusLight
 
 A **dynamic Cordis plugin** for [DeepSeek Harness](https://github.com/deepseek-ai) that reflects the model's live state through a character's facial expressions, and pops up character-specific chat bubbles when a task completes, errors, or asks you a question. Supports **9 characters** with instant switching, plus a **Windows system-level always-on-top transparent mini-window** (independent of the browser — visible even when the browser is minimized).
 
@@ -22,7 +22,7 @@ A **dynamic Cordis plugin** for [DeepSeek Harness](https://github.com/deepseek-a
 ## Repository Layout
 
 ```
-dsh-plugin-StatusLight/
+dsh-StatusLight/
 ├── src/                          # Source (Cordis plugin definition)
 │   ├── host/index.js             # Host half: state machine / events / RPC / HTTP API / window process
 │   ├── client/index.js           # Client half: floating status light UI in the web page
