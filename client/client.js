@@ -46,13 +46,21 @@ function apply(ctx) {
       const lastCharRef = React.useRef(null)
       const pendingFullRef = React.useRef(false)
 
+      // 静态 bundle 无 harness RPC：client↔host 走 HTTP（/statuslight/api/*）
+      const apiCall = (path) => {
+        try {
+          if (typeof fetch !== 'function') return Promise.resolve(null)
+          return fetch('/statuslight/api/' + path).then((r) => r.json()).catch(() => null)
+        } catch (e) { return Promise.resolve(null) }
+      }
+
       const closeItem = (key) => {
         itemsRef.current = itemsRef.current.filter((n) => n.key !== key)
         setItems(itemsRef.current)
       }
 
       const dismissItem = (n) => {
-        host.call('status-light/dismiss', { seq: n.seq }).catch(() => {})
+        apiCall('dismiss?seq=' + n.seq)
         closeItem(n.key)
       }
 
@@ -82,7 +90,7 @@ function apply(ctx) {
           tickRef.current += 1
           const useFull = pendingFullRef.current
           const since = useFull ? 0 : sinceRef.current
-          host.call('status-light/state', { since }).then((res) => {
+          apiCall('state?since=' + since).then((res) => {
             if (!res) return
             setSnap(res)
             if (res.image) imageRef.current = res.image
@@ -126,13 +134,13 @@ function apply(ctx) {
       const jump = (n) => { performJump(n); dismissItem(n) }
 
       const selectChar = (folder) => {
-        host.call('status-light/select-character', { folder }).catch(() => {})
+        apiCall('select?folder=' + encodeURIComponent(folder))
         setMenu(false)
       }
 
       const toggleWindow = () => {
         const enabled = !(snap && snap.window !== false)
-        host.call('status-light/window', { enabled }).catch(() => {})
+        apiCall('window?enabled=' + (enabled ? 1 : 0))
         setMenu(false)
       }
 
