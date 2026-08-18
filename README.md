@@ -1,107 +1,107 @@
 # dsh-plugin-StatusLight
 
-为 [DeepSeek Harness](https://github.com/deepseek-ai) 编写的 **状态灯动态 Cordis 插件**：用角色表情实时反映模型运行状态，并在任务完成 / 出错 / 向你提问时弹出角色专属聊天框气泡。支持 **9 个角色** 随时切换，还提供 **Windows 系统级置顶透明小窗**（独立于浏览器窗口，浏览器最小化也能看到状态）。
+A **dynamic Cordis plugin** for [DeepSeek Harness](https://github.com/deepseek-ai) that reflects the model's live state through a character's facial expressions, and pops up character-specific chat bubbles when a task completes, errors, or asks you a question. Supports **9 characters** with instant switching, plus a **Windows system-level always-on-top transparent mini-window** (independent of the browser — visible even when the browser is minimized).
 
-> 中文 | [English](README.en.md)
+> [中文](README.zh.md) | English
 
-## 特性一览
+## Highlights
 
-- **角色状态灯**：浮动显示当前角色表情，随模型状态自动切换——
-  - 思考中 → `think` 表情
-  - 出错 → `error` 表情（随机一张）
-  - 完成回答 → `complete` 表情（随机一张）
-  - 启动 / 空闲 → `default` 表情
-  - 状态优先级：`error > think > complete > default`，出错后自动恢复
-- **多角色**：内置 芙宁娜、胡桃、空、纳西妲、枫原万叶、荧、钟离、红绿灯、机器人 共 9 个角色；右键状态灯或置顶小窗即可切换，选择持久化保存
-- **聊天框气泡**：任务完成 / 出错 / 向你提问时，角色头顶弹出专属聊天框（文字 + 「查看详细」跳转对应会话）；60 秒自动消失，可点红叉立即关闭
-- **「查看详细」跳转**：一键定位到对应 agent / 子 agent 会话；浏览器窗口自动恢复并聚焦（不退出全屏）
-- **系统级置顶小窗**（Windows）：基于 PowerShell + WPF 的置顶透明小窗，浏览器最小化时依然显示角色状态与聊天框；支持自由拖动、右键菜单、断线自动重连
-- **逐像素透明**：WPF `AllowsTransparency` 每像素 Alpha 渲染，无紫边/黑边
-- **持久化**：角色、网页位置、小窗位置、小窗开关均保存在工作区 `.statuslight.json`
+- **Character status light**: a floating character portrait that switches with model state —
+  - Thinking → `think` expression
+  - Error → `error` expression (random pick)
+  - Completed → `complete` expression (random pick)
+  - Idle / startup → `default` expression
+  - State priority: `error > think > complete > default`, auto-recovers after errors
+- **Multi-character**: ships with 9 characters — Furina, Hu Tao, Aether, Nahida, Kazuha, Lumine, Zhongli, Traffic Light, Robot; right-click the light or the mini-window to switch (persisted)
+- **Chat bubbles**: on completion / error / question, a character-specific chat box pops above the portrait (text + a **View Details** link that jumps to the exact session); auto-dismisses after 60 s, or immediately via the red ×
+- **View Details jump**: opens the corresponding agent / subagent session; the browser window is restored and focused without leaving fullscreen
+- **System-level always-on-top window** (Windows): a PowerShell + WPF transparent mini-window that keeps showing state and chat bubbles even when the browser is minimized; draggable, right-click menu, auto-respawn on failure
+- **Per-pixel transparency**: WPF `AllowsTransparency` per-pixel alpha rendering — no purple/black fringes
+- **Persistence**: character, page position, window position and window toggle are saved to `.statuslight.json` in the workspace
 
-## 目录结构
+## Repository Layout
 
 ```
 dsh-plugin-StatusLight/
-├── src/                          # 源码（Cordis 插件定义）
-│   ├── host/index.js             # Host 半部分：状态机/事件/RPC/HTTP API/小窗进程
-│   ├── client/index.js           # Client 半部分：网页右下角浮动状态灯 UI
-│   └── window/statuslight-window.ps1  # 置顶小窗 WPF 脚本（仓库副本）
+├── src/                          # Source (Cordis plugin definition)
+│   ├── host/index.js             # Host half: state machine / events / RPC / HTTP API / window process
+│   ├── client/index.js           # Client half: floating status light UI in the web page
+│   └── window/statuslight-window.ps1  # Always-on-top WPF window script (repo copy)
 ├── assets/
-│   └── characters/               # 角色素材（每角色一个文件夹，可自定义新增）
-│       ├── fufu/                 # 芙宁娜
-│       ├── hutao/                # 胡桃
-│       ├── kong/                 # 空
-│       ├── naxida/               # 纳西妲
-│       ├── wanye/                # 枫原万叶
-│       ├── ying/                 # 荧
-│       ├── zhongli/              # 钟离
-│       ├── 红绿灯/                # 红绿灯
-│       └── 机器人/                # 机器人
+│   └── characters/               # Character assets (one folder per character; add your own)
+│       ├── fufu/                 # Furina
+│       ├── hutao/                # Hu Tao
+│       ├── kong/                 # Aether
+│       ├── naxida/               # Nahida
+│       ├── wanye/                # Kazuha
+│       ├── ying/                 # Lumine
+│       ├── zhongli/              # Zhongli
+│       ├── 红绿灯/                # Traffic Light
+│       └── 机器人/                # Robot
 ├── docs/
-│   ├── rule.zh.md                # 插件需求规则说明（原 rule.txt）
-│   ├── architecture.md           # 架构设计
-│   └── api.md                    # HTTP API / RPC / 配置 / 素材目录规范
-├── manifest.json                 # 插件元数据
-├── LICENSE                       # MIT（代码部分）
-├── README.md                     # 本文档
-└── README.en.md                  # English
+│   ├── rule.zh.md                # Original requirement spec (was rule.txt)
+│   ├── architecture.md           # Architecture design
+│   └── api.md                    # HTTP API / RPC / config / asset conventions
+├── manifest.json                 # Plugin metadata
+├── LICENSE                       # MIT (code only)
+├── README.md                     # English (default)
+└── README.zh.md                  # 中文
 ```
 
-### 角色素材规范
+### Character Asset Convention
 
-每个角色目录内固定为：
+Each character folder uses a fixed layout:
 
 ```
-assets/characters/<角色文件夹>/
+assets/characters/<folder>/
 ├── action/
-│   ├── default/      # 默认/空闲表情（可多张，随机）
-│   ├── think/        # 思考表情（可多张，随机）
-│   ├── error/        # 出错表情（可多张，随机）
-│   └── complete/     # 完成表情（可多张，随机）
-└── 聊天框/            # 聊天框气泡图片（当前固定使用 聊天框_长句.png）
+│   ├── default/      # default/idle expressions (multiple OK, random pick)
+│   ├── think/        # thinking expressions (multiple OK, random pick)
+│   ├── error/        # error expressions (multiple OK, random pick)
+│   └── complete/     # completed expressions (multiple OK, random pick)
+└── 聊天框/            # chat bubble images (currently fixed to 聊天框_长句.png)
 ```
 
-> 兼容旧布局：角色目录也可直接放在工作区根目录（`<角色文件夹>/action/...`），插件会自动探测两种布局并优先使用 `assets/characters`。
+> Legacy layout is still supported: character folders may also live directly in the workspace root (`<folder>/action/...`). The plugin auto-detects both and prefers `assets/characters`.
 
-## 安装与使用
+## Installation & Usage
 
-### 环境要求
+### Requirements
 
-- Windows（置顶小窗依赖 PowerShell 5.1 + .NET WPF，均为系统自带）
-- DeepSeek Harness 运行中的会话
+- Windows (the mini-window relies on PowerShell 5.1 + .NET WPF, both built-in)
+- A running DeepSeek Harness session
 
-### 步骤
+### Steps
 
-1. 将本仓库（或其中 `assets/characters` 目录）放入 DeepSeek Harness 的工作区目录。
-2. 在 Harness 会话中通过 **动态 Cordis 插件机制** 加载：
-   - `src/host/index.js` 作为 **Host 代码**
-   - `src/client/index.js` 作为 **Client 代码**
-   - 使用 `cordis_define`（kind: new，建议 idPrefix `stlt`）定义，再 `cordis_run` 运行
-3. 状态灯出现在网页右下角；置顶小窗默认开启（屏幕右上角透明窗口）。
-4. 右键角色可切换角色；左键拖动小窗可移动（自动保存位置）。
+1. Put this repository (or at least its `assets/characters` directory) into the DeepSeek Harness workspace.
+2. Load it through the **dynamic Cordis plugin mechanism** in the session:
+   - `src/host/index.js` as the **Host code**
+   - `src/client/index.js` as the **Client code**
+   - `cordis_define` (kind: new, suggested idPrefix `stlt`), then `cordis_run`
+3. The status light appears at the bottom-right of the page; the always-on-top mini-window is on by default (top-right of the screen).
+4. Right-click the character to switch; left-drag the mini-window to move it (position is saved automatically).
 
-## 交互说明
+## Interactions
 
-| 操作 | 效果 |
+| Action | Effect |
 |---|---|
-| 左键拖动（小窗） | 移动置顶小窗位置（自动保存） |
-| 右键（网页 / 小窗） | 切换角色 / 打开主界面 / 关闭置顶小窗 |
-| 聊天框「查看详细」 | 跳转对应 agent / 子 agent 会话（恢复浏览器窗口，不退出全屏） |
-| 聊天框「×」 | 关闭聊天框（两端同步，切换角色 / 开关小窗不会复活） |
-| 聊天框自动消失 | 60 秒超时，或对应 agent 再次运行时提前隐藏 |
+| Left-drag (mini-window) | Move the always-on-top window (auto-saved) |
+| Right-click (page / window) | Switch character / open main UI / close mini-window |
+| Chat bubble **View Details** | Jump to the agent / subagent session (restore browser, no fullscreen exit) |
+| Chat bubble **×** | Dismiss (synced on both ends; never resurrects after switching characters / toggling window) |
+| Auto-dismiss | 60 s timeout, or earlier when the agent runs again |
 
-角色聊天框垂直偏移（保证文字区域恒定、图片上下对齐）：
+Per-character vertical offset of the chat box (keeps the text zone fixed while the image aligns):
 
-| 角色 | 偏移 |
+| Character | Offset |
 |---|---|
-| 红绿灯 | 上移 5px |
-| 机器人 | 不偏移 |
-| 其他角色 | 上移 3px |
+| Traffic Light | up 5px |
+| Robot | none |
+| Others | up 3px |
 
-## 配置
+## Configuration
 
-运行配置保存在工作区 `.statuslight.json`（已加入 `.gitignore`，不会随仓库发布）：
+Runtime config lives in `.statuslight.json` in the workspace (gitignored, never published):
 
 ```json
 {
@@ -112,25 +112,25 @@ assets/characters/<角色文件夹>/
 }
 ```
 
-| 字段 | 说明 |
+| Field | Description |
 |---|---|
-| `character` | 当前角色（文件夹名） |
-| `position` | 网页浮动状态灯位置 |
-| `window` | 置顶小窗是否开启 |
-| `windowPos` | 置顶小窗位置 |
+| `character` | Current character (folder name) |
+| `position` | Floating light position in the page |
+| `window` | Whether the always-on-top window is enabled |
+| `windowPos` | Always-on-top window position |
 
-## 技术栈
+## Tech Stack
 
-- **Host**：DeepSeek Harness 动态 Cordis 插件（ROOT ctx），监听 `agent/status` / `agent/error` / `tools/result` / `agent/disposed` 事件驱动状态机
-- **Client**：React（无 JSX，`React.createElement`）+ `slots.inject('shell.overlay')` + `styles.insert`
-- **置顶小窗**：PowerShell 5.1 + WPF（`AllowsTransparency` 逐像素透明、`Topmost`、DispatcherTimer 500ms 轮询、DPI 感知拖拽、进程自愈重连）
-- **HTTP**：`webServer.register({ kind: 'prefix', path: '/statuslight' })` 提供状态快照与图片静态服务
+- **Host**: DeepSeek Harness dynamic Cordis plugin (ROOT ctx); a state machine driven by `agent/status`, `agent/error`, `tools/result` and `agent/disposed` events
+- **Client**: React (no JSX, `React.createElement`) + `slots.inject('shell.overlay')` + `styles.insert`
+- **Mini-window**: PowerShell 5.1 + WPF (`AllowsTransparency` per-pixel alpha, `Topmost`, 500 ms DispatcherTimer polling, DPI-aware dragging, self-healing respawn)
+- **HTTP**: `webServer.register({ kind: 'prefix', path: '/statuslight' })` serves state snapshots and images
 
-详见 [docs/architecture.md](docs/architecture.md) 与 [docs/api.md](docs/api.md)。
+See [docs/architecture.md](docs/architecture.md) and [docs/api.md](docs/api.md).
 
-## 许可
+## License
 
-- **代码**：MIT（见 [LICENSE](LICENSE)）
-- **角色图片素材**：版权归原作者 / 原作品所有，仅供个人学习使用，请自行确认使用许可；如需分发请替换为自有素材。
+- **Code**: MIT (see [LICENSE](LICENSE))
+- **Character image assets**: owned by their original authors/works; provided for personal/learning use only — verify the license before redistribution, or replace them with your own assets.
 
-> 提示：本插件通过动态 Cordis 机制定义，属会话内临时扩展，重启后需重新加载；仓库内的 `src/host/index.js`、`src/client/index.js` 即定义时所用源码。
+> Note: this plugin is defined via the dynamic Cordis mechanism, so it is a session-scoped extension and must be reloaded after a restart. The files in `src/` are exactly the source used when defining the plugin.
