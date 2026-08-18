@@ -8,9 +8,18 @@
 </p>
 
 <p align="center">
-  <img src="https://img.shields.io/badge/version-v1.0.27-blue?style=flat-square" alt="version">
-  <img src="https://img.shields.io/badge/license-MIT-blue?style=flat-square" alt="License">
+  <img src="https://img.shields.io/npm/v/dsh-pet-statuslight?style=flat-square" alt="npm version">
+  <img src="https://img.shields.io/npm/dm/dsh-pet-statuslight?style=flat-square" alt="npm monthly downloads">
+  <img src="https://img.shields.io/npm/dt/dsh-pet-statuslight?style=flat-square" alt="npm total downloads">
+  <img src="https://img.shields.io/github/stars/kongchengavg/dsh-pet-StatusLight?style=flat-square&label=stars" alt="stars">
+</p>
+<p align="center">
+  <img src="https://img.shields.io/npm/l/dsh-pet-statuslight?style=flat-square" alt="license">
+  <img src="https://img.shields.io/badge/awesome%20dsh%20plugin-8A2BE2?style=flat-square" alt="awesome dsh plugin">
+  <img src="https://img.shields.io/github/repo-size/kongchengavg/dsh-pet-StatusLight?style=flat-square" alt="repo size">
+  <img src="https://img.shields.io/github/issues/kongchengavg/dsh-pet-StatusLight?style=flat-square" alt="issues">
   <img src="https://img.shields.io/badge/platform-Windows-blue?style=flat-square" alt="Platform">
+  <img src="https://img.shields.io/badge/assets-9%20characters-green?style=flat-square" alt="assets">
 </p>
 
 A character portrait that reflects your model's live state — thinking, error, completed, idle — with character-specific chat bubbles when a task finishes, fails, or asks you a question. Click through to the exact session in one step. Even with the browser minimized, the system-level always-on-top mini-window keeps you company.

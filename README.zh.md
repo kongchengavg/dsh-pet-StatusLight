@@ -8,9 +8,18 @@
 </p>
 
 <p align="center">
-  <img src="https://img.shields.io/badge/version-v1.0.27-blue?style=flat-square" alt="version">
-  <img src="https://img.shields.io/badge/license-MIT-blue?style=flat-square" alt="License">
+  <img src="https://img.shields.io/npm/v/dsh-pet-statuslight?style=flat-square" alt="npm version">
+  <img src="https://img.shields.io/npm/dm/dsh-pet-statuslight?style=flat-square" alt="npm monthly downloads">
+  <img src="https://img.shields.io/npm/dt/dsh-pet-statuslight?style=flat-square" alt="npm total downloads">
+  <img src="https://img.shields.io/github/stars/kongchengavg/dsh-pet-StatusLight?style=flat-square&label=stars" alt="stars">
+</p>
+<p align="center">
+  <img src="https://img.shields.io/npm/l/dsh-pet-statuslight?style=flat-square" alt="license">
+  <img src="https://img.shields.io/badge/awesome%20dsh%20plugin-8A2BE2?style=flat-square" alt="awesome dsh plugin">
+  <img src="https://img.shields.io/github/repo-size/kongchengavg/dsh-pet-StatusLight?style=flat-square" alt="repo size">
+  <img src="https://img.shields.io/github/issues/kongchengavg/dsh-pet-StatusLight?style=flat-square" alt="issues">
   <img src="https://img.shields.io/badge/platform-Windows-blue?style=flat-square" alt="Platform">
+  <img src="https://img.shields.io/badge/assets-9%20characters-green?style=flat-square" alt="assets">
 </p>
 
 模型思考、出错、完成任务时，角色表情实时切换；完成、出错、向你提问时，角色头顶弹出专属聊天框，点一下还能跳到对应会话。就算浏览器最小化了也不怕——系统级置顶小窗继续陪着你。
