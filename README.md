@@ -36,7 +36,7 @@ Feel free to open an [issue](https://github.com/kongchengavg/dsh-pet-StatusLight
 
 **Method 2: Manual install**
 
-- **Static install (recommended, no cordis tools needed)** — published to npm; install with one command:
+- **Static install** — published to npm; install with one command:
 
   ```sh
   dsh plugin --profile web add dsh-pet-statuslight          # one-line npm install

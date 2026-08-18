@@ -29,7 +29,6 @@
     "lib",
     "client",
     "cordis.patch.yml",
-    "src",
     "docs",
     "INSTALL.md",
     "README.md",

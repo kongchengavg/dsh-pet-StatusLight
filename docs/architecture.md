@@ -72,7 +72,7 @@
 
 ## 7. 置顶小窗（Windows）
 
-- **进程**：Host 将内嵌 PS1 模板写入 `<baseDir>/statuslight-window.ps1`（仓库副本在 `src/window/`），`subprocess.spawn` 启动，参数带 `-Api http://127.0.0.1:<port>/statuslight/api` 与 `-Config <baseDir>/.statuslight.json`。
+- **进程**：Host 将内嵌 PS1 模板写入 `<baseDir>/statuslight-window.ps1`（模板内嵌于 `lib/index.js`，仓库不再保留独立副本），`subprocess.spawn` 启动，参数带 `-Api http://127.0.0.1:<port>/statuslight/api` 与 `-Config <baseDir>/.statuslight.json`。
 - **渲染**：WPF `WindowStyle=None + AllowsTransparency + Background=Transparent + Topmost + ShowInTaskbar=false`；Grid 内：聊天框 Image（190×90）、TextBlock 文字、「查看详细」链接、红色 × Border、角色 Image（130×130 底部居中）。
 - **轮询**：DispatcherTimer 500 ms `GET /api`（无参即全量快照）→ 更新角色图（URL 变化才下载）、应用 `chatOffset` 偏移、显示/隐藏聊天框、60 s 超时隐藏（`chatUntil = tick+120`）。
 - **拖动**：`MouseLeftButtonDown` 记录 `PointToScreen` 起点 + 窗口 Left/Top，`MouseMove` 中按 `VisualTreeHelper.GetDpi` 的 DpiScale 换算物理像素→DIP，`CaptureMouse` 保证快速拖动不掉帧；`MouseLeftButtonUp` 保存 `/api/pos`。交互子元素（查看详细、×）在 `MouseLeftButtonDown` 置 `e.Handled=$true` 阻止拖动。

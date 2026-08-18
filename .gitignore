@@ -4,7 +4,7 @@
 # npm 凭据（发布用，严禁提交）
 .npmrc
 
-# 置顶小窗脚本（Host 运行时生成到工作区根目录的产物；仓库副本在 src/window/）
+# 置顶小窗脚本（Host 运行时生成到工作区根目录的产物）
 /statuslight-window.ps1
 
 # 系统/编辑器

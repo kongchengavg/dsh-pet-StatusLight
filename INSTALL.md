@@ -4,24 +4,16 @@
 
 ## 0. 背景（必读）
 
-dsh-pet-StatusLight 是 **Cordis 插件**，支持两种安装方式：
+dsh-pet-StatusLight 是 **静态 dsh 插件**（bundle）：本仓库即标准 dsh 插件包（`package.json` 声明 `dsh.bundle.patch` + host/client 入口），通过 `dsh plugin --profile <name> add <npm|git>` 挂载进 profile，由宿主自动加载——**任何会话都不需要 `cordis_*` 工具**，重启后仍生效。
 
-| 方式 | 是否需要 `cordis_*` 工具 | 适用场景 |
-|---|---|---|
-| **A. 静态安装（推荐）** | ❌ 不需要 | 任何会话都可执行；装进 dsh profile，重启后仍生效 |
-| **B. 动态安装（备选）** | ✅ 需要 | 会话必须在 **cordis** preset 下创建（工具才存在）；仅当前进程有效 |
-
-> 静态安装的本质：本仓库本身就是一个标准 dsh bundle 插件包（`package.json` 声明 `dsh.bundle.patch` + host/client 入口），通过 `dsh plugin --profile <name> add <目录|git|npm>` 挂载进 profile，由宿主自动加载，**任何会话都无需 cordis 工具**。
->
 > 素材发现：插件会从会话工作区（agent cwd / workspaceRoot）自动定位角色素材（`assets/characters/` 或根目录布局）。
 
 ## 1. 前提检查
 
 1. 确认本仓库目录可访问，且 `assets/characters/` 下至少存在一个角色文件夹（每个角色含 `action/` 子目录）。
 2. 确认 `dsh` CLI 可用（`dsh --version` 或 `npx -y @deepseek-ai/dsh --version`）。
-3. （动态方式）确认会话是在 **cordis** preset 下创建、工具列表含 `cordis_define` / `cordis_run`。
 
-## 2. 方式 A：静态安装（不依赖 cordis 工具，推荐）
+## 2. 安装
 
 ### 2.1 添加插件到 profile
 
@@ -54,36 +46,14 @@ dsh plugin --profile web remove dsh-pet-statuslight   # 卸载
 dsh plugin --profile web add <新来源>              # 更新（重新 add 即可）
 ```
 
-## 3. 方式 B：动态安装（需要 cordis preset 会话）
-
-仅当无法/不想改 profile 时使用；插件仅存活于当前进程，dsh 重启后失效。
-
-### 3.1 读取源码（不要改动）
-
-| 文件 | 用途 |
-|---|---|
-| `src/host/index.js` | 作为插件的 **Host 代码** |
-| `src/client/index.js` | 作为插件的 **Client 代码** |
-
-### 3.2 定义插件（`cordis_define`）
-
-- `plugin`：`kind = "new"`，`idPrefix = "stlt"`
-- `name`：`StatusLight 状态灯`
-- `code.host` = `src/host/index.js` 全文
-- `code.client` = `src/client/index.js` 全文
-
-### 3.3 运行插件（`cordis_run`，mode=`run`）
-
-若返回 `awaiting-approval`，请用户在界面允许。
-
-## 4. 验证清单（两种方式通用）
+## 3. 验证清单
 
 - ✅ `GET /statuslight/api/state` 返回 9 个角色与当前角色图片
 - ✅ 页面右下角状态灯显示
 - ✅（Windows）置顶小窗出现，右键可切换角色
 - ✅ 任意 agent 运行时角色切「思考」，完成后弹聊天框气泡
 
-## 5. 常见问题排查
+## 4. 常见问题排查
 
 | 现象 | 原因与处理 |
 |---|---|
@@ -92,9 +62,8 @@ dsh plugin --profile web add <新来源>              # 更新（重新 add 即�
 | 置顶小窗不出现 | 仅 Windows；检查 `/statuslight/api` 可达、PowerShell 可用、日志 `status-light spawn window` |
 | 网页状态灯不显示 | 小窗开启时网页角色隐藏（同一角色不重复）；可关掉小窗或检查页面右下角 |
 | 静态安装后没生效 | 未重启 dsh web；或 add 时 profile 名不对（`dsh profile list` 核对） |
-| 动态安装提示无工具 | 会话不是 cordis preset：改用方式 A 静态安装 |
 
-## 6. 配置
+## 5. 配置
 
 工作区根目录 `.statuslight.json`（插件自动读写）：
 
@@ -107,6 +76,6 @@ dsh plugin --profile web add <新来源>              # 更新（重新 add 即�
 }
 ```
 
-## 7. 完成确认
+## 6. 完成确认
 
 向用户确认：状态灯正常、小窗（Windows）正常、agent 运行时状态切换与聊天框弹出。全部通过即为安装成功。

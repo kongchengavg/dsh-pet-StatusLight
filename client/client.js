@@ -1,5 +1,4 @@
 // dsh-pet-StatusLight — Client bundle (static web half).
-// Generated from src/client/index.js; keep the two in sync.
 // Loaded by the dsh web profile through package.json exports["./client"].
 // Hand-written in the lazy-CJS bundle protocol (window.__ModuleLoader__.load
 // with a factory returning cordis-plugin exports), so no build step and no
@@ -9,11 +8,7 @@ window.__ModuleLoader__.load({
   factory: (require) => {
     var module = { exports: {} }
     var exports = module.exports
-// dsh-pet-StatusLight — Client 半部分源码（v26）
-// 通过 DeepSeek Harness 动态 Cordis 插件机制定义：
-//   cordis_define(code.client = 本文件内容) 后 cordis_run。
-// 功能：右下角浮动状态灯、角色切换菜单、聊天框气泡（查看详细/红叉）、
-//       置顶小窗开关、通知缓存与忽略同步。
+// Static client half of the dsh-pet-statuslight bundle.
 function apply(ctx) {
     const slots = ctx.get('slots')
     if (!slots) return
