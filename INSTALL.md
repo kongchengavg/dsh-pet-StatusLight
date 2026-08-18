@@ -25,12 +25,15 @@ dsh-StatusLight 是 **Cordis 插件**，支持两种安装方式：
 
 ### 2.1 添加插件到 profile
 
+任选一种来源（推荐 GitHub 源，立即可用）：
+
 ```sh
-dsh plugin --profile web add D:/Users/1/Desktop/code/agent/dsh/dsh-plugin/dsh-StatusLight
+dsh plugin --profile web add git+https://github.com/kongchengavg/dsh-StatusLight.git   # GitHub 源
+dsh plugin --profile web add D:/Users/1/Desktop/code/agent/dsh/dsh-plugin/dsh-StatusLight   # 本地目录
+dsh plugin --profile web add dsh-statuslight   # npm 包名（发布到 npm 后可用）
 ```
 
 - `<profile>`：当前使用的 dsh 前端 profile（通常为 `web`；可用 `dsh profile list` 查看）。
-- 支持任意 pnpm 来源：本地目录（如上）、GitHub（`git+https://github.com/kongchengavg/dsh-StatusLight.git`）、npm 包名。
 - 命令会把 `dsh-statuslight` 写入该 profile 的 `package.json`（dependencies + `dsh.profile.bundles`）并完成安装。
 
 ### 2.2 重启 dsh web 使插件加载

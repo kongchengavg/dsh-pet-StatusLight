@@ -36,10 +36,14 @@
 
 **方法二：手动安装**
 
-- **方式 A：静态安装（推荐，不依赖 cordis 工具）** —— 本仓库即标准 dsh 插件包：
+- **方式 A：静态安装（推荐，不依赖 cordis 工具）** —— 本仓库即标准 dsh 插件包，一行命令安装：
 
   ```sh
+  dsh plugin --profile web add git+https://github.com/kongchengavg/dsh-StatusLight.git   # GitHub 源，立即可用
+  # 或本地目录：
   dsh plugin --profile web add D:/Users/1/Desktop/code/agent/dsh/dsh-plugin/dsh-StatusLight
+  # npm 包名（发布到 npm 后可用）：
+  dsh plugin --profile web add dsh-statuslight
   ```
 
   重启 dsh web 后插件自动加载（任何会话都可用，无需 `cordis_*` 工具）。

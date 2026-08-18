@@ -22,6 +22,9 @@
   "peerDependencies": {
     "@deepseek-ai/cordis": "^4.0.1"
   },
+  "scripts": {
+    "prepack": "node -e \"const fs=require('fs');['lib/index.js','client/client.js','cordis.patch.yml','package.json'].forEach(f=>{if(!fs.existsSync(f)){console.error('missing '+f);process.exit(1)}});console.log('prepack ok')\""
+  },
   "files": [
     "lib",
     "client",
@@ -29,6 +32,8 @@
     "src",
     "docs",
     "INSTALL.md",
+    "README.md",
+    "README.zh.md",
     "LICENSE"
   ],
   "keywords": [

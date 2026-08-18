@@ -36,10 +36,14 @@ Feel free to open an [issue](https://github.com/kongchengavg/dsh-StatusLight/iss
 
 **Method 2: Manual install**
 
-- **Option A: Static install (recommended, no cordis tools needed)** — this repository is a standard dsh plugin bundle:
+- **Option A: Static install (recommended, no cordis tools needed)** — this repository is a standard dsh plugin bundle; install with one command:
 
   ```sh
+  dsh plugin --profile web add git+https://github.com/kongchengavg/dsh-StatusLight.git   # GitHub source, works now
+  # or a local directory:
   dsh plugin --profile web add D:/Users/1/Desktop/code/agent/dsh/dsh-plugin/dsh-StatusLight
+  # npm package name (after publishing to npm):
+  dsh plugin --profile web add dsh-statuslight
   ```
 
   Restart dsh web and the plugin loads automatically (usable from any session, no `cordis_*` tools required).
