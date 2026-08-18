@@ -8,12 +8,12 @@
 </p>
 
 <p align="center">
-  <img src="https://img.shields.io/npm/v/dsh-pet-statuslight?style=flat-square" alt="npm version">
-  <img src="https://img.shields.io/npm/l/dsh-pet-statuslight?style=flat-square" alt="license">
-  <img src="https://img.shields.io/github/repo-size/kongchengavg/dsh-pet-StatusLight?style=flat-square" alt="repo size">
-  <img src="https://img.shields.io/github/issues/kongchengavg/dsh-pet-StatusLight?style=flat-square" alt="issues">
-  <img src="https://img.shields.io/badge/platform-Windows-blue?style=flat-square" alt="Platform">
-  <img src="https://img.shields.io/badge/assets-9%20characters-green?style=flat-square" alt="assets">
+  <a href="https://www.npmjs.com/package/dsh-pet-statuslight"><img src="https://img.shields.io/npm/v/dsh-pet-statuslight?style=flat-square" alt="npm version"></a>
+  <a href="LICENSE"><img src="https://img.shields.io/npm/l/dsh-pet-statuslight?style=flat-square" alt="license"></a>
+  <a href="https://github.com/kongchengavg/dsh-pet-StatusLight"><img src="https://img.shields.io/github/repo-size/kongchengavg/dsh-pet-StatusLight?style=flat-square" alt="repo size"></a>
+  <a href="https://github.com/kongchengavg/dsh-pet-StatusLight/issues"><img src="https://img.shields.io/github/issues/kongchengavg/dsh-pet-StatusLight?style=flat-square" alt="issues"></a>
+  <a href="INSTALL.md"><img src="https://img.shields.io/badge/platform-Windows-blue?style=flat-square" alt="Platform"></a>
+  <a href="https://github.com/kongchengavg/dsh-pet-StatusLight/tree/main/assets/characters"><img src="https://img.shields.io/badge/assets-9%20characters-green?style=flat-square" alt="assets"></a>
 </p>
 
 模型思考、出错、完成任务时，角色表情实时切换；完成、出错、向你提问时，角色头顶弹出专属聊天框，点一下还能跳到对应会话。就算浏览器最小化了也不怕——系统级置顶小窗继续陪着你。

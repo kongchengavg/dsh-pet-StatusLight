@@ -8,12 +8,12 @@
 </p>
 
 <p align="center">
-  <img src="https://img.shields.io/npm/v/dsh-pet-statuslight?style=flat-square" alt="npm version">
-  <img src="https://img.shields.io/npm/l/dsh-pet-statuslight?style=flat-square" alt="license">
-  <img src="https://img.shields.io/github/repo-size/kongchengavg/dsh-pet-StatusLight?style=flat-square" alt="repo size">
-  <img src="https://img.shields.io/github/issues/kongchengavg/dsh-pet-StatusLight?style=flat-square" alt="issues">
-  <img src="https://img.shields.io/badge/platform-Windows-blue?style=flat-square" alt="Platform">
-  <img src="https://img.shields.io/badge/assets-9%20characters-green?style=flat-square" alt="assets">
+  <a href="https://www.npmjs.com/package/dsh-pet-statuslight"><img src="https://img.shields.io/npm/v/dsh-pet-statuslight?style=flat-square" alt="npm version"></a>
+  <a href="LICENSE"><img src="https://img.shields.io/npm/l/dsh-pet-statuslight?style=flat-square" alt="license"></a>
+  <a href="https://github.com/kongchengavg/dsh-pet-StatusLight"><img src="https://img.shields.io/github/repo-size/kongchengavg/dsh-pet-StatusLight?style=flat-square" alt="repo size"></a>
+  <a href="https://github.com/kongchengavg/dsh-pet-StatusLight/issues"><img src="https://img.shields.io/github/issues/kongchengavg/dsh-pet-StatusLight?style=flat-square" alt="issues"></a>
+  <a href="INSTALL.md"><img src="https://img.shields.io/badge/platform-Windows-blue?style=flat-square" alt="Platform"></a>
+  <a href="https://github.com/kongchengavg/dsh-pet-StatusLight/tree/main/assets/characters"><img src="https://img.shields.io/badge/assets-9%20characters-green?style=flat-square" alt="assets"></a>
 </p>
 
 A character portrait that reflects your model's live state — thinking, error, completed, idle — with character-specific chat bubbles when a task finishes, fails, or asks you a question. Click through to the exact session in one step. Even with the browser minimized, the system-level always-on-top mini-window keeps you company.
