@@ -36,7 +36,7 @@
 
 **方法二：手动安装**
 
-- **方式 A：静态安装（推荐，不依赖 cordis 工具）** —— 已发布到 npm，一行命令安装：
+- **静态安装（推荐，不依赖 cordis 工具）** —— 已发布到 npm，一行命令安装：
 
   ```sh
   dsh plugin --profile web add dsh-pet-statuslight          # npm 一键安装
