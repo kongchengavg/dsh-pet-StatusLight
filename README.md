@@ -41,7 +41,7 @@ Feel free to open an [issue](https://github.com/kongchengavg/dsh-pet-StatusLight
 
 ## Highlights & Features
 
-- 🐾 **9 desktop-pet characters**: Furina, Hu Tao, Aether, Nahida, Kazuha, Lumine, Zhongli, Traffic Light, Robot; switch anytime via right-click, and your choice is remembered.
+- 🐾 **9 desktop-pet characters**: Furina, Hu Tao, Aether, Nahida, Kazuha, Lumine, Zhongli, Traffic Light, Robot; switch anytime via right-click, and your choice is remembered. Assets ship inside the npm package, so the pet appears in **any session or workspace**.
 - 🎭 **Live expressions**: four states — thinking, error, completed, idle — each with its own set of expressions; errors take priority and auto-recover.
 - 💬 **Character chat bubbles**: pop up when a task completes, errors, or asks you a question; tap **View Details** to jump straight to the session.
 - 🪟 **Always-on-top mini-window** (Windows): a transparent window independent of the browser — visible even when the browser is minimized; draggable, right-click to switch characters, auto-respawns on failure.
