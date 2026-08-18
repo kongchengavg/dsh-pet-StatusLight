@@ -1,7 +1,7 @@
 {
   "id": "dsh-pet-StatusLight",
   "name": "StatusLight 状态灯",
-  "version": "1.0.29",
+  "version": "1.0.30",
   "description": "DeepSeek Harness 静态插件：角色表情状态灯 + 聊天框气泡 + Windows 系统级置顶小窗。Reflects model state via character expressions, with chat bubbles and an always-on-top mini window.",
   "author": "kongchengavg",
   "license": "MIT",
