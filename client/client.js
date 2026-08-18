@@ -8,9 +8,12 @@ window.__ModuleLoader__.load({
   factory: (require) => {
     var module = { exports: {} }
     var exports = module.exports
+    // 静态 client 环境：React 通过 require 获取（与 dshmarket/modlens 一致），
+    // 动态环境则用全局 React。
+    var React = (typeof React !== 'undefined' && React) ? React : (typeof require === 'function' ? require('react') : undefined)
 // Static client half of the dsh-pet-statuslight bundle.
 function apply(ctx) {
-    const slots = ctx.get('slots')
+    const slots = ctx.slots !== undefined ? ctx.slots : ctx.get('slots')
     if (!slots) return
 
     const CSS = `
@@ -32,7 +35,18 @@ function apply(ctx) {
 .sl-menu-active{background:rgba(90,140,255,.35);color:#fff;font-weight:600;}
 .sl-menu-sep{height:1px;background:rgba(255,255,255,.15);margin:4px 6px;}
 `
-    try { styles.insert(CSS) } catch (e) {}
+    // 静态 client 无 styles 全局：手动注入 <style>（modlens 同款做法）
+    if (typeof document !== 'undefined') {
+      try {
+        let st = document.querySelector('style[data-plugin-css="dsh-pet-statuslight"]')
+        if (!st) {
+          st = document.createElement('style')
+          st.setAttribute('data-plugin-css', 'dsh-pet-statuslight')
+          st.textContent = CSS
+          document.head.appendChild(st)
+        }
+      } catch (e) {}
+    }
 
     const StatusLight = () => {
       const [snap, setSnap] = React.useState(null)
@@ -65,7 +79,7 @@ function apply(ctx) {
       }
 
       const performJump = (j) => {
-        const sessions = ctx.get('sessions')
+        const sessions = ctx.sessions !== undefined ? ctx.sessions : ctx.get('sessions')
         if (!sessions || !j) return
         try {
           const addr = sessions.subagentAddress(j.agentId)
@@ -84,9 +98,7 @@ function apply(ctx) {
       }
 
       React.useEffect(() => {
-        const timerSvc = ctx.get('timer')
-        if (!timerSvc) return
-        return timerSvc.interval(() => {
+        const tick = () => {
           tickRef.current += 1
           const useFull = pendingFullRef.current
           const since = useFull ? 0 : sinceRef.current
@@ -128,7 +140,9 @@ function apply(ctx) {
             const next = itemsRef.current.filter((n) => tickRef.current - n.born <= n.ttl)
             if (next.length !== itemsRef.current.length) { itemsRef.current = next; setItems(next) }
           }).catch(() => {})
-        }, 500)
+        }
+        const id = (typeof setInterval === 'function') ? setInterval(tick, 500) : null
+        return () => { if (id !== null && typeof clearInterval === 'function') clearInterval(id) }
       }, [])
 
       const jump = (n) => { performJump(n); dismissItem(n) }
