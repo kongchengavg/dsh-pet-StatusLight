@@ -30,6 +30,12 @@ Feel free to open an [issue](https://github.com/kongchengavg/dsh-StatusLight/iss
 
 ## Installation
 
+**Method 1: Hand it to your AI**
+
+> Follow [INSTALL.md](INSTALL.md) at https://github.com/kongchengavg/dsh-StatusLight/ to install this plugin.
+
+**Method 2: Manual install**
+
 1. Put this repository (or its `assets/characters` directory) into your DeepSeek Harness workspace.
 2. In the Harness session, load it through the dynamic Cordis plugin mechanism:
    - `src/host/index.js` as the **Host code**

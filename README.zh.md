@@ -30,6 +30,12 @@
 
 ## 安装
 
+**方法一：交给 AI**
+
+> 按照 https://github.com/kongchengavg/dsh-StatusLight/ 的 [INSTALL.md](INSTALL.md) 安装该插件
+
+**方法二：手动安装**
+
 1. 把仓库（或其中的 `assets/characters` 目录）放进 DeepSeek Harness 的工作区。
 2. 在 Harness 会话里通过动态 Cordis 插件机制加载：
    - `src/host/index.js` 作为 **Host 代码**
