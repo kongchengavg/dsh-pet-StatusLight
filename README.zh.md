@@ -9,13 +9,7 @@
 
 <p align="center">
   <img src="https://img.shields.io/npm/v/dsh-pet-statuslight?style=flat-square" alt="npm version">
-  <img src="https://img.shields.io/npm/dm/dsh-pet-statuslight?style=flat-square" alt="npm monthly downloads">
-  <img src="https://img.shields.io/npm/dt/dsh-pet-statuslight?style=flat-square" alt="npm total downloads">
-  <img src="https://img.shields.io/github/stars/kongchengavg/dsh-pet-StatusLight?style=flat-square&label=stars" alt="stars">
-</p>
-<p align="center">
   <img src="https://img.shields.io/npm/l/dsh-pet-statuslight?style=flat-square" alt="license">
-  <img src="https://img.shields.io/badge/awesome%20dsh%20plugin-8A2BE2?style=flat-square" alt="awesome dsh plugin">
   <img src="https://img.shields.io/github/repo-size/kongchengavg/dsh-pet-StatusLight?style=flat-square" alt="repo size">
   <img src="https://img.shields.io/github/issues/kongchengavg/dsh-pet-StatusLight?style=flat-square" alt="issues">
   <img src="https://img.shields.io/badge/platform-Windows-blue?style=flat-square" alt="Platform">
