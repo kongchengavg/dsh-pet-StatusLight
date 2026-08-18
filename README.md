@@ -45,8 +45,6 @@ Feel free to open an [issue](https://github.com/kongchengavg/dsh-pet-StatusLight
 - 🎭 **Live expressions**: four states — thinking, error, completed, idle — each with its own set of expressions; errors take priority and auto-recover.
 - 💬 **Character chat bubbles**: pop up when a task completes, errors, or asks you a question; tap **View Details** to jump straight to the session.
 - 🪟 **Always-on-top mini-window** (Windows): a transparent window independent of the browser — visible even when the browser is minimized; draggable, right-click to switch characters, auto-respawns on failure.
-- 🎨 **Per-pixel transparency**: WPF per-pixel alpha rendering — no fringes.
-- ⚡ **Lightweight, zero-config**: a dynamic Cordis plugin loaded in-session; no Harness configuration changes required.
 
 ## Installation
 
