@@ -44,16 +44,7 @@
   dsh plugin --profile web add git+https://github.com/kongchengavg/dsh-pet-StatusLight.git
   ```
 
-  重启 dsh web 后插件自动加载（任何会话都可用，无需 `cordis_*` 工具）。
-
-- **方式 B：动态安装（需 cordis preset 会话）**
-
-  1. 把仓库（或其中的 `assets/characters` 目录）放进 DeepSeek Harness 的工作区。
-  2. 在 **cordis** preset 的会话里用动态 Cordis 机制加载：
-     - `src/host/index.js` 作为 **Host 代码**
-     - `src/client/index.js` 作为 **Client 代码**
-     - `cordis_define` 定义后 `cordis_run` 运行
-  3. 状态灯出现在页面右下角，置顶小窗默认开启。
+  重启 dsh web 后插件自动加载。
 
 ## 用法
 
