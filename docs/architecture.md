@@ -7,7 +7,7 @@
 ```
 ┌──────────────────────────────  DeepSeek Harness 进程（Host）  ─────────────────────────────┐
 │                                                                                            │
-│  Cordis 动态插件 stlt-1（ROOT ctx，跨所有 agent/子 agent）                                   │
+│  Cordis 静态插件 dsh-pet-statuslight（ROOT ctx，跨所有 agent/子 agent）                    │
 │                                                                                            │
 │  ┌──────────────┐   agent/status / agent/error / tools/result / agent/disposed             │
 │  │   状态机      │◄───────────────────────────────────────────────   Harness 事件总线        │
@@ -33,7 +33,7 @@
 
 ## 2. 运行位置与作用域
 
-- **Host 半部分**在 Harness 的 **ROOT ctx** 下运行（动态 Cordis 插件由会话定义，但挂在根上下文），因此能收到**所有** agent（含子 agent）的 `agent/status`、`agent/error` 事件——这正是「9 角色状态灯」能反映整棵会话树状态的原因。
+- **Host 半部分**在 Harness 的 **ROOT ctx** 下运行（静态 dsh bundle 插件，经 `dsh plugin --profile web add dsh-pet-statuslight` 挂载进 profile，由宿主加载），因此能收到**所有** agent（含子 agent）的 `agent/status`、`agent/error` 事件——这正是「9 角色状态灯」能反映整棵会话树状态的原因。
 - **Client 半部分**运行在浏览器页面，通过 `slots.inject('shell.overlay')` 把状态灯挂到页面覆盖层。
 - **置顶小窗**是独立进程：Host 把内嵌的 PowerShell 脚本写成 `statuslight-window.ps1` 后，用 `subprocess.spawn` 启动 `powershell.exe -STA`，小窗只通过 HTTP 轮询快照，**不依赖浏览器页面存活**。
 
