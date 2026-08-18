@@ -1,4 +1,4 @@
-// dsh-StatusLight — Host 半部分源码（v27）
+// dsh-pet-StatusLight — Host 半部分源码（v27）
 // 通过 DeepSeek Harness 动态 Cordis 插件机制定义：
 //   cordis_define(code.host = 本文件内容) 后 cordis_run。
 // 功能：状态机（default/think/error/complete）、通知、角色/配置持久化、

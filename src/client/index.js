@@ -1,4 +1,4 @@
-// dsh-StatusLight — Client 半部分源码（v26）
+// dsh-pet-StatusLight — Client 半部分源码（v26）
 // 通过 DeepSeek Harness 动态 Cordis 插件机制定义：
 //   cordis_define(code.client = 本文件内容) 后 cordis_run。
 // 功能：右下角浮动状态灯、角色切换菜单、聊天框气泡（查看详细/红叉）、

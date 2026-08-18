@@ -1,6 +1,6 @@
-# dsh bundle layer: mount the dsh-StatusLight plugin.
+# dsh bundle layer: mount the dsh-pet-StatusLight plugin.
 # Loaded via package.json `dsh.bundle.patch` when this package is added to a
 # dsh profile (e.g. `dsh plugin --profile web add <dir|git|npm>`).
 - insert:
-    - id: dsh-statuslight
-      name: 'dsh-statuslight'
+    - id: dsh-pet-statuslight
+      name: 'dsh-pet-statuslight'

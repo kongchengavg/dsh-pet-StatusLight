@@ -1,4 +1,4 @@
-<h1 align="center">dsh-StatusLight</h1>
+<h1 align="center">dsh-pet-StatusLight</h1>
 
 <p align="center"><b>A talking desktop pet for DeepSeek Harness.</b></p>
 
@@ -17,7 +17,7 @@ A character portrait that reflects your model's live state — thinking, error, 
 
 ## Contact
 
-Feel free to open an [issue](https://github.com/kongchengavg/dsh-StatusLight/issues/new/choose) for bugs, suggestions, or questions.
+Feel free to open an [issue](https://github.com/kongchengavg/dsh-pet-StatusLight/issues/new/choose) for bugs, suggestions, or questions.
 
 ## Highlights & Features
 
@@ -32,18 +32,18 @@ Feel free to open an [issue](https://github.com/kongchengavg/dsh-StatusLight/iss
 
 **Method 1: Hand it to your AI (copy and send the text below to your AI)**
 
-> "Install this plugin by following INSTALL.md at https://github.com/kongchengavg/dsh-StatusLight/"
+> "Install this plugin by following INSTALL.md at https://github.com/kongchengavg/dsh-pet-StatusLight/"
 
 **Method 2: Manual install**
 
 - **Option A: Static install (recommended, no cordis tools needed)** — this repository is a standard dsh plugin bundle; install with one command:
 
   ```sh
-  dsh plugin --profile web add git+https://github.com/kongchengavg/dsh-StatusLight.git   # GitHub source, works now
+  dsh plugin --profile web add git+https://github.com/kongchengavg/dsh-pet-StatusLight.git   # GitHub source, works now
   # or a local directory:
-  dsh plugin --profile web add D:/Users/1/Desktop/code/agent/dsh/dsh-plugin/dsh-StatusLight
+  dsh plugin --profile web add D:/Users/1/Desktop/code/agent/dsh/dsh-plugin/dsh-pet-StatusLight
   # npm package name (after publishing to npm):
-  dsh plugin --profile web add dsh-statuslight
+  dsh plugin --profile web add dsh-pet-statuslight
   ```
 
   Restart dsh web and the plugin loads automatically (usable from any session, no `cordis_*` tools required).

@@ -1,4 +1,4 @@
-<h1 align="center">dsh-StatusLight</h1>
+<h1 align="center">dsh-pet-StatusLight</h1>
 
 <p align="center"><b>给 DeepSeek Harness 配一个会说话的桌面宠物。</b></p>
 
@@ -17,7 +17,7 @@
 
 ## 交流
 
-欢迎提 [issue](https://github.com/kongchengavg/dsh-StatusLight/issues/new/choose) 反馈 bug、建议或使用问题。
+欢迎提 [issue](https://github.com/kongchengavg/dsh-pet-StatusLight/issues/new/choose) 反馈 bug、建议或使用问题。
 
 ## 亮点及功能
 
@@ -32,18 +32,18 @@
 
 **方法一：交给 AI（将以下文字复制并发给 AI）**
 
-> 「按照 https://github.com/kongchengavg/dsh-StatusLight/ 的 INSTALL.md 安装该插件」
+> 「按照 https://github.com/kongchengavg/dsh-pet-StatusLight/ 的 INSTALL.md 安装该插件」
 
 **方法二：手动安装**
 
 - **方式 A：静态安装（推荐，不依赖 cordis 工具）** —— 本仓库即标准 dsh 插件包，一行命令安装：
 
   ```sh
-  dsh plugin --profile web add git+https://github.com/kongchengavg/dsh-StatusLight.git   # GitHub 源，立即可用
+  dsh plugin --profile web add git+https://github.com/kongchengavg/dsh-pet-StatusLight.git   # GitHub 源，立即可用
   # 或本地目录：
-  dsh plugin --profile web add D:/Users/1/Desktop/code/agent/dsh/dsh-plugin/dsh-StatusLight
+  dsh plugin --profile web add D:/Users/1/Desktop/code/agent/dsh/dsh-plugin/dsh-pet-StatusLight
   # npm 包名（发布到 npm 后可用）：
-  dsh plugin --profile web add dsh-statuslight
+  dsh plugin --profile web add dsh-pet-statuslight
   ```
 
   重启 dsh web 后插件自动加载（任何会话都可用，无需 `cordis_*` 工具）。

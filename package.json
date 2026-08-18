@@ -1,5 +1,5 @@
 {
-  "name": "dsh-statuslight",
+  "name": "dsh-pet-statuslight",
   "version": "1.0.27",
   "description": "DeepSeek Harness status-light plugin: character expressions follow the model state, chat-bubble notifications, and a Windows always-on-top mini-window. 状态灯插件：角色表情跟随模型状态 + 聊天框气泡 + 系统级置顶小窗。",
   "type": "module",
@@ -49,7 +49,7 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/kongchengavg/dsh-StatusLight.git"
+    "url": "git+https://github.com/kongchengavg/dsh-pet-StatusLight.git"
   },
-  "homepage": "https://github.com/kongchengavg/dsh-StatusLight"
+  "homepage": "https://github.com/kongchengavg/dsh-pet-StatusLight"
 }

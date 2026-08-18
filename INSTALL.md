@@ -1,10 +1,10 @@
 # 安装指南（INSTALL.md）
 
-本文档写给 **AI 助手**：请按以下步骤，为 DeepSeek Harness（dsh）安装并验证 **dsh-StatusLight** 插件。人类用户也可以把它当作安装对照清单。
+本文档写给 **AI 助手**：请按以下步骤，为 DeepSeek Harness（dsh）安装并验证 **dsh-pet-StatusLight** 插件。人类用户也可以把它当作安装对照清单。
 
 ## 0. 背景（必读）
 
-dsh-StatusLight 是 **Cordis 插件**，支持两种安装方式：
+dsh-pet-StatusLight 是 **Cordis 插件**，支持两种安装方式：
 
 | 方式 | 是否需要 `cordis_*` 工具 | 适用场景 |
 |---|---|---|
@@ -28,13 +28,13 @@ dsh-StatusLight 是 **Cordis 插件**，支持两种安装方式：
 任选一种来源（推荐 GitHub 源，立即可用）：
 
 ```sh
-dsh plugin --profile web add git+https://github.com/kongchengavg/dsh-StatusLight.git   # GitHub 源
-dsh plugin --profile web add D:/Users/1/Desktop/code/agent/dsh/dsh-plugin/dsh-StatusLight   # 本地目录
-dsh plugin --profile web add dsh-statuslight   # npm 包名（发布到 npm 后可用）
+dsh plugin --profile web add git+https://github.com/kongchengavg/dsh-pet-StatusLight.git   # GitHub 源
+dsh plugin --profile web add D:/Users/1/Desktop/code/agent/dsh/dsh-plugin/dsh-pet-StatusLight   # 本地目录
+dsh plugin --profile web add dsh-pet-statuslight   # npm 包名（发布到 npm 后可用）
 ```
 
 - `<profile>`：当前使用的 dsh 前端 profile（通常为 `web`；可用 `dsh profile list` 查看）。
-- 命令会把 `dsh-statuslight` 写入该 profile 的 `package.json`（dependencies + `dsh.profile.bundles`）并完成安装。
+- 命令会把 `dsh-pet-statuslight` 写入该 profile 的 `package.json`（dependencies + `dsh.profile.bundles`）并完成安装。
 
 ### 2.2 重启 dsh web 使插件加载
 
@@ -51,7 +51,7 @@ dsh plugin --profile web add dsh-statuslight   # npm 包名（发布到 npm 后�
 ### 2.3 卸载 / 更新
 
 ```sh
-dsh plugin --profile web remove dsh-statuslight   # 卸载
+dsh plugin --profile web remove dsh-pet-statuslight   # 卸载
 dsh plugin --profile web add <新来源>              # 更新（重新 add 即可）
 ```
 
