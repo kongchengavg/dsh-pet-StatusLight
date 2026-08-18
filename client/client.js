@@ -13,7 +13,7 @@ window.__ModuleLoader__.load({
     var React = (typeof React !== 'undefined' && React) ? React : (typeof require === 'function' ? require('react') : undefined)
 // Static client half of the dsh-pet-statuslight bundle.
 function apply(ctx) {
-    const slots = ctx.slots !== undefined ? ctx.slots : ctx.get('slots')
+    const slots = ctx.slots
     if (!slots) return
 
     const CSS = `
@@ -79,7 +79,7 @@ function apply(ctx) {
       }
 
       const performJump = (j) => {
-        const sessions = ctx.sessions !== undefined ? ctx.sessions : ctx.get('sessions')
+        const sessions = ctx.get('sessions')
         if (!sessions || !j) return
         try {
           const addr = sessions.subagentAddress(j.agentId)
@@ -209,7 +209,7 @@ function apply(ctx) {
 }
 
     exports.apply = apply
-    exports.inject = []
+    exports.inject = ['slots']
     return module.exports
   },
 })
