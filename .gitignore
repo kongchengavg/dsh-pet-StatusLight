@@ -1,0 +1,7 @@
+# 运行时配置（含本机路径）
+.statuslight.json
+
+# 系统/编辑器
+.DS_Store
+Thumbs.db
+*.log
