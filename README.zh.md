@@ -30,9 +30,9 @@
 
 ## 安装
 
-**方法一：交给 AI**
+**方法一：交给 AI（将以下文字复制并发给 AI）**
 
-> 按照 https://github.com/kongchengavg/dsh-StatusLight/ 的 [INSTALL.md](INSTALL.md) 安装该插件
+> 「按照 https://github.com/kongchengavg/dsh-StatusLight/ 的 INSTALL.md 安装该插件」
 
 **方法二：手动安装**
 

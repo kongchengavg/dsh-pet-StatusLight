@@ -30,9 +30,9 @@ Feel free to open an [issue](https://github.com/kongchengavg/dsh-StatusLight/iss
 
 ## Installation
 
-**Method 1: Hand it to your AI**
+**Method 1: Hand it to your AI (copy and send the text below to your AI)**
 
-> Follow [INSTALL.md](INSTALL.md) at https://github.com/kongchengavg/dsh-StatusLight/ to install this plugin.
+> "Install this plugin by following INSTALL.md at https://github.com/kongchengavg/dsh-StatusLight/"
 
 **Method 2: Manual install**
 
