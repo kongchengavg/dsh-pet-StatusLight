@@ -36,12 +36,22 @@ Feel free to open an [issue](https://github.com/kongchengavg/dsh-StatusLight/iss
 
 **Method 2: Manual install**
 
-1. Put this repository (or its `assets/characters` directory) into your DeepSeek Harness workspace.
-2. In the Harness session, load it through the dynamic Cordis plugin mechanism:
-   - `src/host/index.js` as the **Host code**
-   - `src/client/index.js` as the **Client code**
-   - `cordis_define` then `cordis_run`
-3. The status light appears at the bottom-right of the page; the always-on-top mini-window is on by default.
+- **Option A: Static install (recommended, no cordis tools needed)** — this repository is a standard dsh plugin bundle:
+
+  ```sh
+  dsh plugin --profile web add D:/Users/1/Desktop/code/agent/dsh/dsh-plugin/dsh-StatusLight
+  ```
+
+  Restart dsh web and the plugin loads automatically (usable from any session, no `cordis_*` tools required).
+
+- **Option B: Dynamic install (requires a cordis-preset session)**
+
+  1. Put this repository (or its `assets/characters` directory) into your DeepSeek Harness workspace.
+  2. In a session created with the **cordis** preset, load it via the dynamic Cordis mechanism:
+     - `src/host/index.js` as the **Host code**
+     - `src/client/index.js` as the **Client code**
+     - `cordis_define` then `cordis_run`
+  3. The status light appears at the bottom-right of the page; the always-on-top mini-window is on by default.
 
 ## Usage
 
