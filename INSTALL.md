@@ -25,12 +25,11 @@ dsh-pet-StatusLight 是 **Cordis 插件**，支持两种安装方式：
 
 ### 2.1 添加插件到 profile
 
-任选一种来源（推荐 GitHub 源，立即可用）：
+任选一种来源（推荐 npm 包名，已发布）：
 
 ```sh
+dsh plugin --profile web add dsh-pet-statuslight   # npm 一键安装
 dsh plugin --profile web add git+https://github.com/kongchengavg/dsh-pet-StatusLight.git   # GitHub 源
-dsh plugin --profile web add D:/Users/1/Desktop/code/agent/dsh/dsh-plugin/dsh-pet-StatusLight   # 本地目录
-dsh plugin --profile web add dsh-pet-statuslight   # npm 包名（发布到 npm 后可用）
 ```
 
 - `<profile>`：当前使用的 dsh 前端 profile（通常为 `web`；可用 `dsh profile list` 查看）。
