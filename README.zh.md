@@ -15,6 +15,23 @@
 
 模型思考、出错、完成任务时，角色表情实时切换；完成、出错、向你提问时，角色头顶弹出专属聊天框，点一下还能跳到对应会话。就算浏览器最小化了也不怕——系统级置顶小窗继续陪着你。
 
+## 预览
+
+<p align="center">
+  <img src="assets/screenshots/characters.png" alt="角色阵容" width="520">
+  <br><em>九位角色，右键随时切换</em>
+</p>
+
+<p align="center">
+  <img src="assets/screenshots/states.png" alt="四种状态" width="620">
+  <br><em>状态灯：思考 / 出错 / 完成 / 空闲 表情自动切换</em>
+</p>
+
+<p align="center">
+  <img src="assets/screenshots/chatbox.png" alt="聊天框" width="520">
+  <br><em>任务完成、出错、提问时弹出角色专属聊天框</em>
+</p>
+
 ## 交流
 
 欢迎提 [issue](https://github.com/kongchengavg/dsh-pet-StatusLight/issues/new/choose) 反馈 bug、建议或使用问题。

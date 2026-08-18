@@ -15,6 +15,23 @@
 
 A character portrait that reflects your model's live state — thinking, error, completed, idle — with character-specific chat bubbles when a task finishes, fails, or asks you a question. Click through to the exact session in one step. Even with the browser minimized, the system-level always-on-top mini-window keeps you company.
 
+## Preview
+
+<p align="center">
+  <img src="assets/screenshots/characters.png" alt="Characters" width="520">
+  <br><em>Nine characters, switch anytime via right-click</em>
+</p>
+
+<p align="center">
+  <img src="assets/screenshots/states.png" alt="Four states" width="620">
+  <br><em>Status light: thinking / error / completed / idle expressions switch automatically</em>
+</p>
+
+<p align="center">
+  <img src="assets/screenshots/chatbox.png" alt="Chat bubble" width="520">
+  <br><em>Character-specific chat bubbles on completion, error, and questions</em>
+</p>
+
 ## Contact
 
 Feel free to open an [issue](https://github.com/kongchengavg/dsh-pet-StatusLight/issues/new/choose) for bugs, suggestions, or questions.
