@@ -1,8 +1,11 @@
-// dsh-plugin-StatusLight — Host 半部分源码（v26）
+// dsh-plugin-StatusLight — Host 半部分源码（v27）
 // 通过 DeepSeek Harness 动态 Cordis 插件机制定义：
 //   cordis_define(code.host = 本文件内容) 后 cordis_run。
 // 功能：状态机（default/think/error/complete）、通知、角色/配置持久化、
 //       公开 API 与图片路由、置顶小窗进程管理、聊天框忽略（dismiss）。
+// 角色素材目录支持两种布局：
+//   A. <baseDir>/assets/characters/<角色>（推荐，本仓库结构）
+//   B. <baseDir>/<角色>（兼容旧布局）
 return {
   apply(ctx) {
     const fs = ctx.get('fs')
@@ -38,6 +41,7 @@ return {
     let jumpId = 0
     let jumpTimer = null
     let dismissed = new Set()
+    let charLocations = new Map()
 
     let cfg = { character: '红绿灯', position: null, window: true, windowPos: null }
     let cfgTarget = null
@@ -57,6 +61,8 @@ return {
     const urlFor = (rel) => '/statuslight/' + rel.split('/').map((s) => encodeURIComponent(s)).join('/')
     const tryNow = () => { try { return Date.now() } catch (e) { return 0 } }
     const chatOffsetOf = (folder) => folder === '红绿灯' ? 5 : folder === '机器人' ? 0 : 3
+    // 角色目录前缀：assets/characters/ 或根目录
+    const charRel = (folder) => (charLocations.get(folder) === 'assets' ? 'assets/characters/' : '') + folder
 
     // ---------- 文件与图片 ----------
     async function listRelImages(relDir) {
@@ -73,15 +79,16 @@ return {
     }
 
     async function pickStateImage(folder, s) {
+      const rel = charRel(folder)
       const dirs = s === 'default' ? ['default', 'defualt'] : [s]
       let list = []
       for (const d of dirs) {
-        list = await listRelImages(folder + '/action/' + d)
+        list = await listRelImages(rel + '/action/' + d)
         if (list.length) break
       }
       if (!list.length) {
         for (const d of ['default', 'defualt']) {
-          list = await listRelImages(folder + '/action/' + d)
+          list = await listRelImages(rel + '/action/' + d)
           if (list.length) break
         }
       }
@@ -91,7 +98,7 @@ return {
 
     // 聊天框固定使用 聊天框_长句.png
     async function pickChatbox(folder, text) {
-      const list = await listRelImages(folder + '/聊天框')
+      const list = await listRelImages(charRel(folder) + '/聊天框')
       if (!list.length) return null
       const want = '聊天框_长句.png'
       const found = list.find((p) => p.indexOf(want) >= 0)
@@ -111,6 +118,16 @@ return {
             if (info && info.type === 'directory') return true
           } catch (err) {}
         }
+        // assets/characters 布局
+        try {
+          const at = await fs.resolve(cand + '/assets/characters')
+          const aes = await fs.listDir(at)
+          for (const e of aes) {
+            if (e.type !== 'directory') continue
+            const info = await fs.stat(await fs.resolve(cand + '/assets/characters/' + e.name + '/action'))
+            if (info && info.type === 'directory') return true
+          }
+        } catch (err) {}
       } catch (err) {}
       return false
     }
@@ -144,22 +161,39 @@ return {
 
     async function discoverCharacters() {
       if (!fs || !baseDir) return
+      const found = []
+      // 优先 assets/characters 布局
+      const assetDir = baseDir + '/assets/characters'
+      try {
+        const at = await fs.resolve(assetDir)
+        const aes = await fs.listDir(at)
+        for (const e of aes) {
+          if (e.type !== 'directory') continue
+          try {
+            const info = await fs.stat(await fs.resolve(assetDir + '/' + e.name + '/action'))
+            if (info && info.type === 'directory') found.push({ folder: e.name, name: charName(e.name), loc: 'assets' })
+          } catch (err) {}
+        }
+      } catch (err) {}
+      // 兼容根目录布局
       try {
         const target = await fs.resolve(baseDir)
         const entries = await fs.listDir(target)
-        const out = []
         for (const e of entries) {
           if (e.type !== 'directory') continue
+          if (found.some((c) => c.folder === e.name)) continue
           try {
             const info = await fs.stat(await fs.resolve(baseDir + '/' + e.name + '/action'))
-            if (info && info.type === 'directory') out.push({ folder: e.name, name: charName(e.name) })
+            if (info && info.type === 'directory') found.push({ folder: e.name, name: charName(e.name), loc: 'root' })
           } catch (err) {}
         }
-        if (out.length) {
-          characters = out
-          if (!characters.some((c) => c.folder === character)) character = characters[0].folder
-        }
       } catch (err) {}
+      if (found.length) {
+        characters = found.map((c) => ({ folder: c.folder, name: c.name }))
+        charLocations = new Map()
+        for (const c of found) charLocations.set(c.folder, c.loc)
+        if (!characters.some((c) => c.folder === character)) character = characters[0].folder
+      }
     }
 
     async function loadConfig() {
@@ -414,14 +448,26 @@ return {
             if (parts.length < 2) { res.writeHead(404); res.end(); return }
             const folder = decodeURIComponent(parts[0])
             const rel = parts.slice(1).map((p) => decodeURIComponent(p)).join('/')
-            const abs = baseDir + '/' + folder + '/' + rel
-            if (abs.indexOf('..') >= 0 || abs.indexOf('\\') >= 0 || !abs.startsWith(baseDir + '/')) { res.writeHead(403); res.end(); return }
-            const target = await fs.resolve(abs)
-            const info = await fs.stat(target)
-            if (!info || info.type !== 'file') { res.writeHead(404); res.end(); return }
-            const bytes = await fs.readBytes(target, undefined, 20 * 1024 * 1024)
-            res.writeHead(200, { 'Content-Type': MIME[extOf(rel)] || 'application/octet-stream', 'Cache-Control': 'no-cache' })
-            res.end(bytes)
+            // 图片路由兼容两种布局：assets/characters/<folder>/... 与 <folder>/...
+            const candidates = []
+            if (charLocations.get(folder) === 'assets') candidates.push(baseDir + '/assets/characters/' + folder + '/' + rel)
+            candidates.push(baseDir + '/' + folder + '/' + rel)
+            let served = false
+            for (const abs of candidates) {
+              if (abs.indexOf('..') >= 0 || abs.indexOf('\\') >= 0) { res.writeHead(403); res.end(); return }
+              try {
+                const target = await fs.resolve(abs)
+                const info = await fs.stat(target)
+                if (info && info.type === 'file') {
+                  const bytes = await fs.readBytes(target, undefined, 20 * 1024 * 1024)
+                  res.writeHead(200, { 'Content-Type': MIME[extOf(rel)] || 'application/octet-stream', 'Cache-Control': 'no-cache' })
+                  res.end(bytes)
+                  served = true
+                  break
+                }
+              } catch (err) {}
+            }
+            if (!served) { res.writeHead(404); res.end() }
           } catch (err) {
             try { res.writeHead(500); res.end() } catch (e) {}
           }
