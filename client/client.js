@@ -23,7 +23,7 @@ function apply(ctx) {
 .sl-chatbox-img{display:block;width:190px;height:auto;user-select:none;-webkit-user-drag:none;}
 .sl-chatbox-body{position:absolute;left:45px;top:19px;width:100px;height:56px;display:flex;flex-direction:column;justify-content:flex-start;align-items:center;gap:2px;pointer-events:none;}
 .sl-chatbox-text{color:#2b2b3a;text-align:center;line-height:1.3;font-weight:600;overflow:hidden;width:100%;}
-.sl-chatbox-link{pointer-events:auto;border:none;background:none;padding:0;margin-top:8px;font-size:11px;font-weight:700;color:#2b5fd9;text-decoration:underline;cursor:pointer;font-family:inherit;}
+.sl-chatbox-link{pointer-events:auto;border:none;background:none;padding:0;margin-top:28px;font-size:11px;font-weight:700;color:#2b5fd9;text-decoration:underline;cursor:pointer;font-family:inherit;}
 .sl-chatbox-link:hover{filter:brightness(1.2);}
 .sl-close{position:absolute;top:6px;right:6px;width:22px;height:22px;border-radius:50%;border:none;background:rgba(220,60,60,.95);color:#fff;font-size:14px;font-weight:700;line-height:1;cursor:pointer;z-index:2;padding:0;}
 .sl-close:hover{filter:brightness(1.15);}
@@ -94,7 +94,7 @@ function apply(ctx) {
 
       const itemFont = (n) => {
         const len = n.text ? n.text.length : 0
-        return len >= 20 ? 10 : len >= 12 ? 12 : 14
+        return len >= 20 ? 10 : 12
       }
 
       React.useEffect(() => {
@@ -141,8 +141,25 @@ function apply(ctx) {
             if (next.length !== itemsRef.current.length) { itemsRef.current = next; setItems(next) }
           }).catch(() => {})
         }
+        // 后台标签页会被浏览器节流 setInterval（降到约 1 次/分钟），
+        // 导致关闭/开启小窗等状态变化无法及时同步到网页角色。
+        // 页面重新可见时立即强制同步一次，消除"刷新后才出现"的延迟。
+        const onVisible = () => {
+          if (typeof document !== 'undefined' && !document.hidden) {
+            pendingFullRef.current = true
+            tick()
+          }
+        }
+        if (typeof document !== 'undefined' && typeof document.addEventListener === 'function') {
+          document.addEventListener('visibilitychange', onVisible)
+        }
         const id = (typeof setInterval === 'function') ? setInterval(tick, 500) : null
-        return () => { if (id !== null && typeof clearInterval === 'function') clearInterval(id) }
+        return () => {
+          if (typeof document !== 'undefined' && typeof document.removeEventListener === 'function') {
+            document.removeEventListener('visibilitychange', onVisible)
+          }
+          if (id !== null && typeof clearInterval === 'function') clearInterval(id)
+        }
       }, [])
 
       const jump = (n) => { performJump(n); dismissItem(n) }
@@ -159,7 +176,10 @@ function apply(ctx) {
       }
 
       const src = (snap && snap.image) || imageRef.current || null
-      const windowOn = !snap || snap.window !== false
+      // 小窗开启（window=true）时立即隐藏网页角色，不等待宽限期：
+      // 用户从网页角色切换为小窗角色后，网页角色立刻取消显示，避免重叠。
+      const targetWindow = !snap || snap.window !== false
+      const windowOn = targetWindow
       const offset = snap && typeof snap.chatOffset === 'number' ? snap.chatOffset : 0
       const imgShift = (-offset) + 'px'
 
