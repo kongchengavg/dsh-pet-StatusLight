@@ -52,7 +52,9 @@ Feel free to open an [issue](https://github.com/kongchengavg/dsh-pet-StatusLight
 
 **Method 1: Hand it to your AI (copy and send the text below to your AI)**
 
-> "Install this plugin by following INSTALL.md at https://github.com/kongchengavg/dsh-pet-StatusLight/"
+```text
+Install this plugin by following INSTALL.md at https://github.com/kongchengavg/dsh-pet-StatusLight/
+```
 
 **Method 2: Manual install**
 
@@ -64,6 +66,12 @@ dsh plugin --profile web add dsh-pet-statuslight          # one-line npm install
 dsh plugin --profile web add git+https://github.com/kongchengavg/dsh-pet-StatusLight.git
 ```
 
+> **No global dsh CLI? Use npx** — run the same commands through npx without installing dsh globally:
+> ```sh
+> npx -y @deepseek-ai/dsh plugin --profile web add dsh-pet-statuslight
+> npx -y @deepseek-ai/dsh plugin --profile web add git+https://github.com/kongchengavg/dsh-pet-StatusLight.git
+> ```
+
 Restart dsh web and the plugin loads automatically.
 
 > Note: pnpm withholds versions published less than 24 hours ago; if you do not get the latest version, pin the version explicitly (e.g. `dsh-pet-statuslight@1.0.33`).
@@ -72,6 +80,8 @@ Restart dsh web and the plugin loads automatically.
 
 ```sh
 dsh plugin --profile web remove dsh-pet-statuslight
+# no global dsh CLI? use npx:
+npx -y @deepseek-ai/dsh plugin --profile web remove dsh-pet-statuslight
 ```
 
 Restart dsh web and the plugin is removed.
@@ -82,6 +92,9 @@ Restart dsh web and the plugin is removed.
 dsh plugin --profile web add dsh-pet-statuslight@<latest>   # npm source (pin version to bypass 24h hold)
 # or re-pull the latest from GitHub:
 dsh plugin --profile web add git+https://github.com/kongchengavg/dsh-pet-StatusLight.git
+# no global dsh CLI? use npx with the same arguments:
+npx -y @deepseek-ai/dsh plugin --profile web add dsh-pet-statuslight@<latest>
+npx -y @deepseek-ai/dsh plugin --profile web add git+https://github.com/kongchengavg/dsh-pet-StatusLight.git
 ```
 
 Re-adding completes the update; restart dsh web to apply.

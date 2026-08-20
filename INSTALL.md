@@ -15,13 +15,21 @@ dsh-pet-StatusLight 是 **静态 dsh 插件**（bundle）：本仓库即标准 d
 
 ## 2. 安装
 
+> **全局安装 dsh CLI 的用户**：直接使用下面的 `dsh plugin ...` 命令。
+> **未安装 dsh、想用 npx 临时使用的用户**：把命令里的 `dsh` 换成 `npx -y @deepseek-ai/dsh` 即可，无需全局安装。
+
 ### 2.1 添加插件到 profile
 
 任选一种来源（推荐 npm 包名，已发布）：
 
 ```sh
+# 全局 dsh CLI：
 dsh plugin --profile web add dsh-pet-statuslight   # npm 一键安装
 dsh plugin --profile web add git+https://github.com/kongchengavg/dsh-pet-StatusLight.git   # GitHub 源
+
+# npx 临时使用（未全局安装 dsh）：
+npx -y @deepseek-ai/dsh plugin --profile web add dsh-pet-statuslight
+npx -y @deepseek-ai/dsh plugin --profile web add git+https://github.com/kongchengavg/dsh-pet-StatusLight.git
 ```
 
 - `<profile>`：当前使用的 dsh 前端 profile（通常为 `web`；可用 `dsh profile list` 查看）。
@@ -42,8 +50,13 @@ dsh plugin --profile web add git+https://github.com/kongchengavg/dsh-pet-StatusL
 ### 2.3 卸载 / 更新
 
 ```sh
+# 全局 dsh CLI：
 dsh plugin --profile web remove dsh-pet-statuslight   # 卸载
 dsh plugin --profile web add <新来源>              # 更新（重新 add 即可）
+
+# npx 临时使用（未全局安装 dsh）：
+npx -y @deepseek-ai/dsh plugin --profile web remove dsh-pet-statuslight
+npx -y @deepseek-ai/dsh plugin --profile web add <新来源>
 ```
 
 ## 3. 验证清单

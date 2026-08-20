@@ -23,7 +23,7 @@ function apply(ctx) {
 .sl-chatbox-img{display:block;width:190px;height:auto;user-select:none;-webkit-user-drag:none;}
 .sl-chatbox-body{position:absolute;left:45px;top:19px;width:100px;height:56px;display:flex;flex-direction:column;justify-content:flex-start;align-items:center;gap:2px;pointer-events:none;}
 .sl-chatbox-text{color:#2b2b3a;text-align:center;line-height:1.3;font-weight:600;overflow:hidden;width:100%;}
-.sl-chatbox-link{pointer-events:auto;border:none;background:none;padding:0;margin-top:28px;font-size:11px;font-weight:700;color:#2b5fd9;text-decoration:underline;cursor:pointer;font-family:inherit;}
+.sl-chatbox-link{pointer-events:auto;border:none;background:none;padding:8px 14px;margin-top:20px;margin-left:-14px;margin-right:-14px;font-size:11px;font-weight:700;color:#2b5fd9;text-decoration:underline;cursor:pointer;font-family:inherit;display:inline-block;}
 .sl-chatbox-link:hover{filter:brightness(1.2);}
 .sl-close{position:absolute;top:6px;right:6px;width:22px;height:22px;border-radius:50%;border:none;background:rgba(220,60,60,.95);color:#fff;font-size:14px;font-weight:700;line-height:1;cursor:pointer;z-index:2;padding:0;}
 .sl-close:hover{filter:brightness(1.15);}
@@ -131,7 +131,7 @@ function apply(ctx) {
               const merged = {}
               for (const it of itemsRef.current) merged[it.key] = it
               for (const n of res.notifications) {
-                merged['n' + n.seq] = { ...n, key: 'n' + n.seq, born: nowTick, ttl: 120 }
+                merged['n' + n.seq] = { ...n, key: 'n' + n.seq, born: nowTick, ttl: 1200 }
               }
               itemsRef.current = Object.values(merged).sort((a, b) => b.seq - a.seq).slice(0, 1)
               setItems(itemsRef.current)
@@ -225,6 +225,50 @@ function apply(ctx) {
     slots.inject('shell.overlay', () => slots.register(
       { name: 'shell.overlay', id: 'dsh-status-light' },
       () => React.createElement(StatusLight, null)
+    ))
+
+    // 会话级占位：渲染时说明「用户正在查看这个会话」，上报给 Host。
+    // 语义区分：
+    //  - 切到新会话（sid 变化）→ view?session=X&read=1：标记该会话通知已读（dismiss），之后切走不补发；
+    //  - 页面回前台（visibilitychange，仍在同一会话）→ view?session=X：仅保持当前会话抑制，
+    //    不 dismiss 已有通知（避免弹窗被「回前台」误关，导致跳出又消失）；
+    //  - 页面后台/离开会话 → view?session=：清除当前会话（聊天框照常弹出）。
+    const reportView = (sid, read) => {
+      try {
+        const visible = typeof document === 'undefined' || document.visibilityState === 'visible'
+        let q = 'session='
+        if (visible && sid) {
+          q = 'session=' + encodeURIComponent(sid) + (read ? '&read=1' : '')
+        }
+        if (typeof fetch === 'function') fetch('/statuslight/api/view?' + q).catch(() => {})
+      } catch (e) {}
+    }
+    const CurrentSessionReporter = (props) => {
+      const sid = props && props.sessionId ? String(props.sessionId) : null
+      const sidRef = React.useRef(null)
+      sidRef.current = sid
+      React.useEffect(() => {
+        // 切到新会话：视为「已读」上报（read=1）
+        reportView(sid, true)
+        // 页面可见性变化：回到前台时仅保持当前会话（read=0），后台时清除
+        const onVis = () => reportView(sidRef.current, false)
+        if (typeof document !== 'undefined' && typeof document.addEventListener === 'function') {
+          document.addEventListener('visibilitychange', onVis)
+        }
+        // 离开该会话（组件卸载）时清除上报
+        return () => {
+          if (typeof document !== 'undefined' && typeof document.removeEventListener === 'function') {
+            document.removeEventListener('visibilitychange', onVis)
+          }
+          reportView(null, false)
+        }
+      }, [sid])
+      return null
+    }
+
+    slots.inject('conversation.session.header.actions', () => slots.register(
+      { name: 'conversation.session.header.actions', id: 'dsh-status-light-session-view' },
+      (props) => React.createElement(CurrentSessionReporter, { sessionId: props && props.sessionId })
     ))
 }
 

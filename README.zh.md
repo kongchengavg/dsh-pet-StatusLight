@@ -52,7 +52,9 @@
 
 **方法一：交给 AI（将以下文字复制并发给 AI）**
 
-> 「按照 https://github.com/kongchengavg/dsh-pet-StatusLight/ 的 INSTALL.md 安装该插件」
+```text
+按照 https://github.com/kongchengavg/dsh-pet-StatusLight/ 的 INSTALL.md 安装该插件
+```
 
 **方法二：手动安装**
 
@@ -64,6 +66,12 @@ dsh plugin --profile web add dsh-pet-statuslight          # npm 一键安装
 dsh plugin --profile web add git+https://github.com/kongchengavg/dsh-pet-StatusLight.git
 ```
 
+> **没有全局安装 dsh CLI？用 npx 临时使用**——无需全局安装，把命令里的 `dsh` 换成 `npx -y @deepseek-ai/dsh` 即可：
+> ```sh
+> npx -y @deepseek-ai/dsh plugin --profile web add dsh-pet-statuslight
+> npx -y @deepseek-ai/dsh plugin --profile web add git+https://github.com/kongchengavg/dsh-pet-StatusLight.git
+> ```
+
 重启 dsh web 后插件自动加载。
 
 > 提示：pnpm 会扣住发布不足 24 小时的新版本，若装到的不是最新版，请**点名版本号**安装（如 `dsh-pet-statuslight@1.0.33`）。
@@ -72,6 +80,8 @@ dsh plugin --profile web add git+https://github.com/kongchengavg/dsh-pet-StatusL
 
 ```sh
 dsh plugin --profile web remove dsh-pet-statuslight
+# 没有全局 dsh CLI？用 npx：
+npx -y @deepseek-ai/dsh plugin --profile web remove dsh-pet-statuslight
 ```
 
 重启 dsh web 后插件移除。
@@ -82,6 +92,9 @@ dsh plugin --profile web remove dsh-pet-statuslight
 dsh plugin --profile web add dsh-pet-statuslight@<最新版本>   # npm 源（点名版本绕过 24h 扣留）
 # 或 GitHub 源重新拉取最新：
 dsh plugin --profile web add git+https://github.com/kongchengavg/dsh-pet-StatusLight.git
+# 没有全局 dsh CLI？用 npx（参数相同）：
+npx -y @deepseek-ai/dsh plugin --profile web add dsh-pet-statuslight@<最新版本>
+npx -y @deepseek-ai/dsh plugin --profile web add git+https://github.com/kongchengavg/dsh-pet-StatusLight.git
 ```
 
 重新 add 即完成更新，重启 dsh web 生效。

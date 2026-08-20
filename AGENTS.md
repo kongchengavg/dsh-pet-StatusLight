@@ -14,6 +14,7 @@
   - 在 GitHub 上发布对应的 Release 或标签。
   - 在 npm 上发布相应版本号的包。
 - **每次发布新版本时，在 Release 说明（及提交信息）中加入简短描述，说明该版本更新了什么内容。**
+- **发布说明含中文（或任何非 ASCII 文字）时，通过 GitHub API 写入必须用 UTF-8 编码发送**：将 body 用 `[System.Text.Encoding]::UTF8.GetBytes(json)` 转字节数组，并带 `Content-Type: application/json; charset=utf-8`。切勿直接用 `Invoke-RestMethod -Body (ConvertTo-Json ...)` 发字符串，否则中文会变乱码（历史教训：v1.0.35/36 的 Release 说明曾因此乱码，后用 UTF-8 字节 PATCH 修复）。
 - 在用户明确指示之前，不要执行任何发布操作。
 
 ## 3. 重启 dsh web
