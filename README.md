@@ -93,11 +93,11 @@ Re-adding completes the update; restart dsh web to apply.
 - **Chat bubble**: tap **View Details** to jump to the session; tap **×** to dismiss instantly; auto-dismisses after 60 seconds.
 - Character and position settings are stored in `.statuslight.json` in the workspace and can be edited manually.
 
-## 后续优化方向
+## Future improvements
 
-1. 为角色添加专属提示音；
-2. 添加更多有趣角色；
-3. 如果有宝贵意见可以提交 issues 交流，我会尽快评估并升级插件。
+1. Add unique notification sounds for each character;
+2. Add more fun characters;
+3. If you have valuable feedback, feel free to open an [issue](https://github.com/kongchengavg/dsh-pet-StatusLight/issues) — I will evaluate it and upgrade the plugin as soon as possible.
 
 ## Disclaimer
 
