@@ -13,6 +13,10 @@
 
 ```jsonc
 {
+  "desktopHost": true,                // 是否由 DSH Desktop 承载
+  "desktopNotificationsEnabled": false, // Desktop 原生通知是否开启；false 时气泡回退为普通 web 行为
+  "desktopClientActive": true,        // Desktop renderer 是否可见且位于前台
+  "currentViewedSession": "session-current", // 当前会话；可空
   "state": "think",                    // default | think | error | complete
   "image": "/statuslight/assets/characters/hutao/action/think/%E6%80%9D%E8%80%83.png", // 当前角色图 URL（可空）
   "character": { "folder": "hutao", "name": "胡桃" },
@@ -26,6 +30,7 @@
   "notifications": [                   // 新通知（增量）
     { "seq": 12, "kind": "complete", "text": "「xx」完成啦",
       "agentId": "session-...", "parentId": null, "mode": null,
+      "canJump": true,                 // Desktop 原生通知开启时：前台且不同会话；关闭时与普通 web 一样恒为 true
       "chatbox": "/statuslight/assets/characters/.../聊天框_长句.png" }
   ]
 }
@@ -56,8 +61,9 @@
 | GET | `/api` 或 `/api/state` | 全量状态快照（同 RPC `since=0`） |
 | GET | `/api/select?folder=<角色>` | 切换角色 |
 | GET | `/api/window?enabled=1\|0` | 开关置顶小窗 |
-| GET | `/api/jump?agent=<id>&parent=<id>&mode=<mode>` | 设置跳转（60 s TTL） |
+| GET | `/api/jump?agent=<id>&seq=<n>&parent=<id>&mode=<mode>` | 设置跳转（60 s TTL），并可用 `seq` 在同一次请求中忽略通知；Desktop 专用模式仅接受不同于当前会话的目标 |
 | GET | `/api/dismiss?seq=<n>` | 忽略通知 |
+| GET | `/api/view?session=<id>&visible=1&active=1&read=1` | 上报当前会话、页面可见性及 Desktop 前台状态；`read=1` 时将目标会话通知标记为已读 |
 | GET | `/api/pos?x=<n>&y=<n>` | 保存小窗位置 |
 | GET | `/statuslight/<角色>/action/<状态>/<文件>` | 静态图片（两种布局自动回退） |
 

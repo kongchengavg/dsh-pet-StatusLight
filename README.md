@@ -16,7 +16,7 @@
   <a href="https://github.com/kongchengavg/dsh-pet-StatusLight/tree/main/assets/characters"><img src="https://img.shields.io/badge/assets-9%20characters-green?style=flat-square" alt="assets"></a>
 </p>
 
-A character portrait that reflects your model's live state — thinking, error, completed, idle — with character-specific chat bubbles when a task finishes, fails, or asks you a question. Click through to the exact session in one step. Even with the browser minimized, the system-level always-on-top mini-window keeps you company.
+A character portrait that reflects your model's live state — thinking, error, completed, idle — with character-specific chat bubbles when a task finishes, fails, or asks you a question. Ordinary dsh web uses the 1.0.37-based **View Details** navigation behavior and dismisses the bubble when you return from the background to its target session. In DSH Desktop, the bubble and its action always appear and disappear together: native notification mode shows **Jump to Session** for 600 seconds only while Desktop is focused on a different session; disabling native notifications restores the **View Details** fallback, including while Desktop is unfocused, minimized, or hidden.
 
 ## Preview
 
@@ -43,7 +43,7 @@ Feel free to open an [issue](https://github.com/kongchengavg/dsh-pet-StatusLight
 
 - 🐾 **9 desktop-pet characters**: Furina, Hu Tao, Aether, Nahida, Kazuha, Lumine, Zhongli, Traffic Light, Robot; switch anytime via right-click, and your choice is remembered.
 - 🎭 **Live expressions**: four states — thinking, error, completed, idle — each with its own set of expressions; errors take priority and auto-recover.
-- 💬 **Character chat bubbles**: pop up when a task completes, errors, or asks you a question; tap **View Details** to jump straight to the session.
+- 💬 **Character chat bubbles**: pop up when a task completes, errors, or asks you a question; ordinary dsh web provides **View Details**. In DSH Desktop, the bubble and action always share visibility: native notification mode shows the focused **Jump to Session** action for 600 seconds, while the fallback uses the same **View Details** duration as dsh web.
 - 🪟 **Always-on-top mini-window** (Windows): a transparent window independent of the browser — visible even when the browser is minimized; draggable, right-click to switch characters, auto-respawns on failure.
 
 ## Install, Uninstall & Update
@@ -103,7 +103,8 @@ Re-adding completes the update; restart dsh web to apply.
 
 - **Right-click** the light or the mini-window: switch character / open the main UI / close the mini-window.
 - **Left-drag** the mini-window: move it (position auto-saved).
-- **Chat bubble**: tap **View Details** to jump to the session; tap **×** to dismiss instantly; auto-dismisses after 60 seconds.
+- **Desktop Profile**: selecting either the `web` or `desktop` Profile inside DSH Desktop uses the same Desktop chat-bubble, notification, and navigation rules; Profile=`web` also shows **Jump to Session** when native notifications are enabled.
+- **Chat bubble**: ordinary dsh web and DSH Desktop both dismiss the bubble when you manually return from the background to its target session. In DSH Desktop, the bubble and action always appear and disappear together. With native notifications enabled, both appear with **Jump to Session** for 600 seconds only while Desktop is focused on a different session; both are hidden while Desktop is unfocused, minimized, hidden, or already on the target session. With native notifications disabled, both remain available with **View Details** and the same duration, read, and navigation behavior as dsh web. Clicking the link, opening the target session manually, or tapping **×** dismisses the bubble.
 - Character and position settings are stored in `.statuslight.json` in the workspace and can be edited manually.
 
 ## Future improvements
